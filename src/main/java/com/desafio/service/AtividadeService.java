@@ -1,5 +1,6 @@
 package com.desafio.service;
 
+import com.desafio.model.StatusProjeto;
 import com.desafio.model.conversor.AtividadeMapper;
 import com.desafio.model.dto.AtividadeDTO;
 import com.desafio.model.entidade.Atividade;
@@ -27,13 +28,18 @@ public class AtividadeService {
         this.colaboradorService = colaboradorService;
     }
 
-
     public void cadastrarAtividade(AtividadeDTO atividadeDTO) {
         Atividade atividade = atividadeMapper.toEntidade(atividadeDTO);
-        Projeto projeto = projetoService.pesquisarProjetoId(atividadeDTO.getProjetoId());
-        Colaborador colaborador = colaboradorService.pesquisarColaboradorId(atividadeDTO.getColaboradorId());
-        atividade.setProjeto(projeto);
-        atividade.setColaborador(colaborador);
+
+        Projeto projeto = projetoService.pesquisarProjetoId(atividadeDTO.getProjeto().getId());
+        projeto.setStatus(StatusProjeto.EM_ANDAMENTO);
+        projetoService.atualizarProjeto(projeto);
+
+        Colaborador colaborador = colaboradorService.pesquisarColaboradorId(atividadeDTO.getColaborador().getId());
+        colaborador.setProjeto(projeto);
+        colaboradorService.atualizarColaborador(colaborador);
+
+        atividade.setFinalizada(Boolean.FALSE);
         atividadeRepository.save(atividade);
     }
 
@@ -46,5 +52,9 @@ public class AtividadeService {
         if (atividadeBase.isPresent()) {
             atividadeRepository.deleteById(idAtividade);
         }
+    }
+
+    public List<AtividadeDTO> listarAtividadesPorProjeto(Long id) {
+        return atividadeMapper.toDtoList(atividadeRepository.findAtividadesByProjetoId(id));
     }
 }

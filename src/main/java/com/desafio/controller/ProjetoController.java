@@ -13,6 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/projeto")
+@CrossOrigin(origins = "http://localhost:8080") // Permitir o front-end acessar
 public class ProjetoController {
     private final ProjetoService projetoService;
 
@@ -31,10 +32,9 @@ public class ProjetoController {
         return new ResponseEntity<>(projetoDTO, HttpStatus.OK);
     }
 
-    @PutMapping(value = "/atualizar/{id}")
-    public ResponseEntity<ProjetoDTO> atualizarProjeto(@PathVariable Long id, @RequestBody ProjetoDTO projetoDTO) {
-        projetoService.atualizarProjeto(id, projetoDTO);
-        return new ResponseEntity<>(HttpStatus.OK);
+    @GetMapping("/cliente/{id}")
+    public ResponseEntity<List<ProjetoDTO>> listarProjetosPorCliente(@PathVariable Long id) {
+        return new ResponseEntity<>(projetoService.listarProjetosPorCliente(id), HttpStatus.OK);
     }
 
     @PutMapping(value = "/finalizar/{id}")

@@ -10,12 +10,12 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface AtividadeMapper {
 
-    @Mapping(source = "projeto.id", target = "projetoId")
-    @Mapping(source = "colaborador.id", target = "colaboradorId")
+    @Mapping(target = "projeto", source = "atividade.projeto")
+    @Mapping(target = "colaborador", source = "atividade.colaborador")
     AtividadeDTO toDto(Atividade atividade);
 
-    @Mapping(source = "projetoId", target = "projeto.id")
-    @Mapping(source = "colaboradorId", target = "colaborador.id")
+    @Mapping(target = "projeto", source = "projeto")
+    @Mapping(target = "colaborador", source = "colaborador")
     Atividade toEntidade(AtividadeDTO atividadeDTO);
 
     List<AtividadeDTO> toDtoList(List<Atividade> atividades);

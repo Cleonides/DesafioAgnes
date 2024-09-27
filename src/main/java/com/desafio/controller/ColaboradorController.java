@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/colaborador")
+@CrossOrigin(origins = "http://localhost:8080") // Permitir o front-end acessar
 public class ColaboradorController {
     private final ColaboradorService colaboradorService;
 

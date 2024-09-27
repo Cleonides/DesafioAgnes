@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/cliente")
+@CrossOrigin(origins = "http://localhost:8080") // Permitir o front-end acessar
 public class ClienteController {
     private final ClienteService clienteService;
 
@@ -23,6 +24,7 @@ public class ClienteController {
     public ResponseEntity<List<ClienteDTO>> listarClientes() {
         return new ResponseEntity<>(clienteService.listarClientes(), HttpStatus.OK);
     }
+
 
     @PostMapping
     public ResponseEntity<ClienteDTO> cadastrarCliente(@RequestBody ClienteDTO cliente) {

@@ -6,10 +6,11 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AtividadeDTO {
+    
     private Long id;
     private String nome;
     private String descricao;
     private Boolean finalizada;
-    private Long projetoId;
-    private Long colaboradorId;
+    private ProjetoDTO projeto;
+    private ColaboradorDTO colaborador;
 }

@@ -10,10 +10,10 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface ProjetoMapper {
 
-    @Mapping(source = "cliente.id", target = "clienteId")
+    @Mapping(target = "cliente", source = "projeto.cliente")
     ProjetoDTO toDto(Projeto projeto);
 
-    @Mapping(source = "clienteId", target = "cliente.id")
+    @Mapping(target = "cliente", source = "cliente")
     Projeto toEntidade(ProjetoDTO projetoDTO);
 
     List<ProjetoDTO> toDtoList(List<Projeto> projetos);

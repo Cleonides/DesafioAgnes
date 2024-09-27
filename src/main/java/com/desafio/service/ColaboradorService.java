@@ -28,7 +28,7 @@ public class ColaboradorService {
     public List<ColaboradorDTO> listarColaboradores() {
         return colaboradorMapper.toDtoList(colaboradorRepository.findAll());
     }
-    
+
     public Colaborador pesquisarColaboradorId(Long idProjeto) {
         return colaboradorRepository.findById(idProjeto).get();
     }
@@ -38,5 +38,9 @@ public class ColaboradorService {
         if (colaboradorBase.isPresent()) {
             colaboradorRepository.deleteById(idColaborador);
         }
+    }
+
+    public void atualizarColaborador(Colaborador colaborador) {
+        colaboradorRepository.save(colaborador);
     }
 }

@@ -26,7 +26,7 @@ public class ProjetoService {
 
     public void cadastrarProjeto(ProjetoDTO projetoDTO) {
         Projeto projeto = projetoMapper.toEntidade(projetoDTO);
-        Cliente cliente = clienteService.pesquisarClienteId(projetoDTO.getClienteId());
+        Cliente cliente = clienteService.pesquisarClienteId(projetoDTO.getCliente().getId());
         projeto.setCliente(cliente);
         projeto.setStatus(StatusProjeto.ABERTO);
         projetoRepository.save(projeto);
@@ -36,12 +36,8 @@ public class ProjetoService {
         return projetoRepository.findById(idProjeto).get();
     }
 
-    public void atualizarProjeto(Long idProjeto, ProjetoDTO projetoDTO) {
-        Projeto projetoTela = projetoMapper.toEntidade(projetoDTO);
-        Projeto projetoBase = projetoRepository.findById(idProjeto).get();
-        projetoBase.getAtividades().addAll(projetoTela.getAtividades());
-        projetoBase.setStatus(StatusProjeto.EM_ANDAMENTO);
-        projetoRepository.save(projetoBase);
+    public void atualizarProjeto(Projeto projeto) {
+        projetoRepository.save(projeto);
     }
 
     public void finalizarProjeto(Long idProjeto, ProjetoDTO projetoDTO) {
@@ -60,10 +56,15 @@ public class ProjetoService {
         return projetoMapper.toDtoList(projetoRepository.findAll());
     }
 
+    public List<ProjetoDTO> listarProjetosPorCliente(Long id) {
+        return projetoMapper.toDtoList(projetoRepository.findProjetosByClienteId(id));
+    }
+
     public void excluirProjeto(Long idProjeto) {
         Optional<Projeto> projetoBase = projetoRepository.findById(idProjeto);
         if (projetoBase.isPresent()) {
             projetoRepository.deleteById(idProjeto);
         }
     }
+
 }
