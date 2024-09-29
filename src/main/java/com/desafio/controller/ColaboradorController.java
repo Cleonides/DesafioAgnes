@@ -7,8 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/colaborador")
@@ -31,13 +29,4 @@ public class ColaboradorController {
         return new ResponseEntity<>(colaboradorDTO, HttpStatus.OK);
     }
 
-    @DeleteMapping(path = "/{id}")
-    public ResponseEntity<Optional<ColaboradorDTO>> excluirColaborador(@PathVariable Long id) {
-        try {
-            colaboradorService.excluirColaborador(id);
-            return new ResponseEntity<Optional<ColaboradorDTO>>(HttpStatus.OK);
-        } catch (NoSuchElementException nsee) {
-            return new ResponseEntity<Optional<ColaboradorDTO>>(HttpStatus.NOT_FOUND);
-        }
-    }
 }

@@ -7,8 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/atividade")
@@ -36,13 +34,4 @@ public class AtividadeController {
         return new ResponseEntity<>(atividadeService.listarAtividadesPorProjeto(id), HttpStatus.OK);
     }
 
-    @DeleteMapping(path = "/{id}")
-    public ResponseEntity<Optional<AtividadeDTO>> excluirAtividade(@PathVariable Long id) {
-        try {
-            atividadeService.excluirAtividade(id);
-            return new ResponseEntity<Optional<AtividadeDTO>>(HttpStatus.OK);
-        } catch (NoSuchElementException nsee) {
-            return new ResponseEntity<Optional<AtividadeDTO>>(HttpStatus.NOT_FOUND);
-        }
-    }
 }

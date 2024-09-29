@@ -4,22 +4,24 @@ import { API_PROJETO } from '../config/api';
 
 class ProjetoService {
 
-    listarProjetos() {
-        return axios.get(API_PROJETO) // Retorna a promessa
-            .then(response => response.data) // Extrai os dados da resposta
-            .catch(error => {
-                console.error('Erro ao carregar os projetos:', error);
-                throw error; // Lança o erro para ser tratado no componente
-            });
+    async listarProjetos() {
+        try {
+            const response = await axios.get(API_PROJETO);
+            return response.data;
+        } catch (error) {
+            console.error('Erro ao carregar os projetos:', error);
+            throw error; 
+        }
     }
     
-    cadastrarProjeto(projeto) {
-        return axios.post(API_PROJETO, projeto) // Retorna a promessa
-            .then(response => response.data) // Extrai os dados da resposta
-            .catch(error => {
-                console.error('Erro ao cadastrar projeto:', error);
-                throw error; // Lança o erro para ser tratado no componente
-            });
+    async cadastrarProjeto(projeto) {
+        try {
+            const response = await axios.post(API_PROJETO, projeto);
+            return response.data;
+        } catch (error) {
+            console.error('Erro ao cadastrar projeto:', error);
+            throw error; 
+        }
     }
 
 }

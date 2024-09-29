@@ -16,7 +16,4 @@ public class ClienteDTO {
     private String descricao;
 
 
-    public ClienteDTO(String nome, String descricao) {
-        this(null, nome, descricao);
-    }
 }

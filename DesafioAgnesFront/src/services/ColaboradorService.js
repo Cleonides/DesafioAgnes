@@ -4,22 +4,24 @@ import { API_COLABORADOR } from '../config/api';
 
 class ColaboradorService {
 
-    listarColaboradores() {
-        return axios.get(API_COLABORADOR) // Retorna a promessa
-            .then(response => response.data) // Extrai os dados da resposta
-            .catch(error => {
-                console.error('Erro ao carregar os colaboradores:', error);
-                throw error; // Lança o erro para ser tratado no componente
-            });
+    async listarColaboradores() {
+        try {
+            const response = await axios.get(API_COLABORADOR);
+            return response.data;
+        } catch (error) {
+            console.error('Erro ao carregar os colaboradores:', error);
+            throw error; 
+        }
     }
     
-    cadastrarColaborador(colaborador) {
-        return axios.post(API_COLABORADOR, colaborador) // Retorna a promessa
-            .then(response => response.data) // Extrai os dados da resposta
-            .catch(error => {
-                console.error('Erro ao cadastrar colaborador:', error);
-                throw error; // Lança o erro para ser tratado no componente
-            });
+    async cadastrarColaborador(colaborador) {
+        try {
+            const response = await axios.post(API_COLABORADOR, colaborador);
+            return response.data;
+        } catch (error) {
+            console.error('Erro ao cadastrar colaborador:', error);
+            throw error; 
+        }
     }
 }
 

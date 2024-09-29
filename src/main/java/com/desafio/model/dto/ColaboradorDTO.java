@@ -1,10 +1,12 @@
 package com.desafio.model.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@AllArgsConstructor
 public class ColaboradorDTO {
 
     private Long id;

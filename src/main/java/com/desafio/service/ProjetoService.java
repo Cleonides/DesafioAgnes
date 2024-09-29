@@ -9,7 +9,6 @@ import com.desafio.repository.ProjetoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProjetoService {
@@ -24,32 +23,20 @@ public class ProjetoService {
         this.clienteService = clienteService;
     }
 
-    public void cadastrarProjeto(ProjetoDTO projetoDTO) {
+    public Projeto cadastrarProjeto(ProjetoDTO projetoDTO) {
         Projeto projeto = projetoMapper.toEntidade(projetoDTO);
-        Cliente cliente = clienteService.pesquisarClienteId(projetoDTO.getCliente().getId());
+        Cliente cliente = clienteService.pesquisarClienteId(projeto.getCliente().getId());
         projeto.setCliente(cliente);
         projeto.setStatus(StatusProjeto.ABERTO);
-        projetoRepository.save(projeto);
+        return projetoRepository.save(projeto);
     }
 
     public Projeto pesquisarProjetoId(Long idProjeto) {
         return projetoRepository.findById(idProjeto).get();
     }
 
-    public void atualizarProjeto(Projeto projeto) {
-        projetoRepository.save(projeto);
-    }
-
-    public void finalizarProjeto(Long idProjeto, ProjetoDTO projetoDTO) {
-        Projeto projetoTela = projetoMapper.toEntidade(projetoDTO);
-        Projeto projetoBase = projetoRepository.findById(idProjeto).get();
-        boolean todasFinalizadas = projetoTela.getAtividades().stream()
-                .allMatch(atividade -> atividade.getFinalizada() == Boolean.TRUE);
-        if (todasFinalizadas) {
-            projetoBase.getAtividades().addAll(projetoTela.getAtividades());
-            projetoBase.setStatus(StatusProjeto.CONCLUIDO);
-            projetoRepository.save(projetoBase);
-        }
+    public Projeto atualizarProjeto(Projeto projeto) {
+       return projetoRepository.save(projeto);
     }
 
     public List<ProjetoDTO> listarProjetos() {
@@ -58,13 +45,6 @@ public class ProjetoService {
 
     public List<ProjetoDTO> listarProjetosPorCliente(Long id) {
         return projetoMapper.toDtoList(projetoRepository.findProjetosByClienteId(id));
-    }
-
-    public void excluirProjeto(Long idProjeto) {
-        Optional<Projeto> projetoBase = projetoRepository.findById(idProjeto);
-        if (projetoBase.isPresent()) {
-            projetoRepository.deleteById(idProjeto);
-        }
     }
 
 }

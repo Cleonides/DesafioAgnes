@@ -4,22 +4,24 @@ import { API_CLIENTE } from '../config/api';
 
 class ClienteService {
 
-    listarClientes() {
-        return axios.get(API_CLIENTE) // Retorna a promessa
-            .then(response => response.data) // Extrai os dados da resposta
-            .catch(error => {
-                console.error('Erro ao carregar clientes:', error);
-                throw error; // Lança o erro para ser tratado no componente
-            });
+    async listarClientes() {
+        try {
+            const response = await axios.get(API_CLIENTE);  
+            return response.data;
+        } catch (error) {
+            console.error('Erro ao carregar clientes:', error);
+            throw error;  
+        }
     }
     
-    cadastrarCliente(cliente) {
-        return axios.post(API_CLIENTE, cliente) // Retorna a promessa
-            .then(response => response.data) // Extrai os dados da resposta
-            .catch(error => {
-                console.error('Erro ao cadastrar cliente:', error);
-                throw error; // Lança o erro para ser tratado no componente
-            });
+    async cadastrarCliente(cliente) {
+        try {
+            const response = await axios.post(API_CLIENTE, cliente);  
+            return response.data;
+        } catch (error) {
+            console.error('Erro ao cadastrar cliente:', error);
+            throw error;  
+        }
     }
 }
 

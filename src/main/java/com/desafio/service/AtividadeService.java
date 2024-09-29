@@ -10,7 +10,6 @@ import com.desafio.repository.AtividadeRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class AtividadeService {
@@ -28,7 +27,7 @@ public class AtividadeService {
         this.colaboradorService = colaboradorService;
     }
 
-    public void cadastrarAtividade(AtividadeDTO atividadeDTO) {
+    public Atividade cadastrarAtividade(AtividadeDTO atividadeDTO) {
         Atividade atividade = atividadeMapper.toEntidade(atividadeDTO);
 
         Projeto projeto = projetoService.pesquisarProjetoId(atividadeDTO.getProjeto().getId());
@@ -40,18 +39,11 @@ public class AtividadeService {
         colaboradorService.atualizarColaborador(colaborador);
 
         atividade.setFinalizada(Boolean.FALSE);
-        atividadeRepository.save(atividade);
+        return atividadeRepository.save(atividade);
     }
 
     public List<AtividadeDTO> listarAtividades() {
         return atividadeMapper.toDtoList(atividadeRepository.findAll());
-    }
-
-    public void excluirAtividade(Long idAtividade) {
-        Optional<Atividade> atividadeBase = atividadeRepository.findById(idAtividade);
-        if (atividadeBase.isPresent()) {
-            atividadeRepository.deleteById(idAtividade);
-        }
     }
 
     public List<AtividadeDTO> listarAtividadesPorProjeto(Long id) {

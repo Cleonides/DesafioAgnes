@@ -85,7 +85,7 @@ export default {
     <template>
       <div class="container mt-5">
         <!-- Título da página -->
-        <h2 class="text-center mb-4">Página do Atividade</h2>
+        <h2 class="text-center mb-4">Página da Atividade</h2>
 
         <!-- Formulário centralizado -->
         <div class="row justify-content-center">

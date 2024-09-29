@@ -7,7 +7,6 @@ import com.desafio.repository.ClienteRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ClienteService {
@@ -21,8 +20,7 @@ public class ClienteService {
     }
 
     public Cliente cadastrarCliente(ClienteDTO clienteDTO) {
-        Cliente cliente = clienteMapper.toEntidade(clienteDTO);
-        return clienteRepository.save(cliente);
+        return clienteRepository.save(clienteMapper.toEntidade(clienteDTO));
     }
 
     public List<ClienteDTO> listarClientes() {
@@ -31,13 +29,6 @@ public class ClienteService {
 
     public Cliente pesquisarClienteId(Long clienteId) {
         return clienteRepository.findById(clienteId).get();
-    }
-
-    public void excluirCliente(Long idCliente) {
-        Optional<Cliente> clienteBase = clienteRepository.findById(idCliente);
-        if (clienteBase.isPresent()) {
-            clienteRepository.deleteById(idCliente);
-        }
     }
 
 }

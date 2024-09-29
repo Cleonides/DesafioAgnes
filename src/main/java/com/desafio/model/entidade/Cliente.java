@@ -29,8 +29,4 @@ public class Cliente {
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private Set<Projeto> projetos = new HashSet<>();
-
-    public Cliente(String nome, String descricao) {
-        this(null, nome, descricao, new HashSet<>());
-    }
 }

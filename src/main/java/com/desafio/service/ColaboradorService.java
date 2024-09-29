@@ -7,7 +7,6 @@ import com.desafio.repository.ColaboradorRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ColaboradorService {
@@ -20,9 +19,8 @@ public class ColaboradorService {
         this.colaboradorMapper = colaboradorMapper;
     }
 
-    public void cadastrarColaborador(ColaboradorDTO colaboradorDTO) {
-        Colaborador colaborador = colaboradorMapper.toEntidade(colaboradorDTO);
-        colaboradorRepository.save(colaborador);
+    public Colaborador cadastrarColaborador(ColaboradorDTO colaboradorDTO) {
+        return colaboradorRepository.save(colaboradorMapper.toEntidade(colaboradorDTO));
     }
 
     public List<ColaboradorDTO> listarColaboradores() {
@@ -33,14 +31,7 @@ public class ColaboradorService {
         return colaboradorRepository.findById(idProjeto).get();
     }
 
-    public void excluirColaborador(Long idColaborador) {
-        Optional<Colaborador> colaboradorBase = colaboradorRepository.findById(idColaborador);
-        if (colaboradorBase.isPresent()) {
-            colaboradorRepository.deleteById(idColaborador);
-        }
-    }
-
-    public void atualizarColaborador(Colaborador colaborador) {
-        colaboradorRepository.save(colaborador);
+    public Colaborador atualizarColaborador(Colaborador colaborador) {
+        return colaboradorRepository.save(colaborador);
     }
 }

@@ -4,32 +4,35 @@ import { API_ATIVIDADE } from '../config/api';
 
 class AtividadeService {
 
-    listarAtividades() {
-        return axios.get(API_ATIVIDADE) // Retorna a promessa
-            .then(response => response.data) // Extrai os dados da resposta
-            .catch(error => {
-                console.error('Erro ao carregar os atividades:', error);
-                throw error; // Lança o erro para ser tratado no componente
-            });
+    async listarAtividades() {
+        try {
+            const response = await axios.get(API_ATIVIDADE);  
+            return response.data;
+        } catch (error) {
+            console.error('Erro ao carregar os atividades:', error);
+            throw error;  
+        }
     }
 
-    listarAtividadesPorProjeto(idProjeto) {
-        return axios.get(`${API_ATIVIDADE}/projeto/${idProjeto}`) // Retorna a promessa
-            .then(response => response.data) // Extrai os dados da resposta
-            .catch(error => {
-                console.error('Erro ao carregar os atividades:', error);
-                throw error; // Lança o erro para ser tratado no componente
-            });
+    async listarAtividadesPorProjeto(idProjeto) {
+        try {
+            const response = await axios.get(`${API_ATIVIDADE}/projeto/${idProjeto}`);  
+            return response.data;
+        } catch (error) {
+            console.error('Erro ao carregar os atividades:', error);
+            throw error; 
+        }
     }
 
     
-    cadastrarAtividade(atividade) {
-        return axios.post(API_ATIVIDADE, atividade) // Retorna a promessa
-            .then(response => response.data) // Extrai os dados da resposta
-            .catch(error => {
-                console.error('Erro ao cadastrar atividade:', error);
-                throw error; // Lança o erro para ser tratado no componente
-            });
+    async cadastrarAtividade(atividade) {
+        try {
+            const response = await axios.post(API_ATIVIDADE, atividade) 
+            return response.data;
+        } catch (error) {
+            console.error('Erro ao cadastrar atividade:', error);
+            throw error;  
+        }
     }
 }
 
