@@ -31,7 +31,7 @@ export default {
     },
     methods: {
         mostrarSucesso() {
-          this.$refs.mensagens.showToast('Atividade cadastrado com sucesso!', 'success');
+          this.$refs.mensagens.showToast('Atividade cadastrada com sucesso!', 'success');
         },
         mostrarErro() {
           this.$refs.mensagens.showToast('Erro ao cadastrar atividade.', 'error');
@@ -78,6 +78,8 @@ export default {
                     this.descricao = ''; // Limpa o campo descricao
                     this.projeto = null; // Limpa o campo descricao
                     this.colaborador = null; // Limpa o campo descricao
+                    this.projetoSelecionado = null, // Armazena o projeto selecionado
+                    this.colaboradorSelecionado = null, // Armazena o colaborador selecionado
                     this.mostrarSucesso();
                 })
                 .catch(error => {
