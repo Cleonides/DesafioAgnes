@@ -2,8 +2,12 @@
 
 <script>
 import ClienteService from '../services/ClienteService'; // Importa o serviço
+import Toasts from '../components/ToastMensagens.vue';
 
 export default {
+    components: {
+      Toasts
+    },
     data() {
         return {
             clientes: [], // Array para armazenar os clientes
@@ -17,6 +21,12 @@ export default {
         this.listarClientes(); // Chama o método para listar clientes
     },
     methods: {
+        mostrarSucesso() {
+          this.$refs.mensagens.showToast('Cliente cadastrado com sucesso!', 'success');
+        },
+        mostrarErro() {
+          this.$refs.mensagens.showToast('Erro ao cadastrar cliente.', 'error');
+        },
         listarClientes() {
             ClienteService.listarClientes()
                 .then(data => {
@@ -37,11 +47,13 @@ export default {
                     this.listarClientes(); // Recarrega a lista de clientes após cadastro
                     this.nome = ''; // Limpa o campo nome
                     this.descricao = ''; // Limpa o campo descrição
+                    this.mostrarSucesso();
                 })
                 .catch(error => {
+                    this.mostrarErro();
                     console.error('Erro ao cadastrar cliente:', error);
                 });
-        }
+        },
     }
 };
 </script>
@@ -86,7 +98,6 @@ export default {
             <th>ID</th>
             <th>Nome</th>
             <th>Descrição</th>
-            <th>Projeto</th>
           </tr>
         </thead>
         <tbody>
@@ -94,17 +105,13 @@ export default {
             <td>{{ cliente.id }}</td>
             <td>{{ cliente.nome }}</td>
             <td>{{ cliente.descricao }}</td>
-            <td> 
-                <div v-for="(projeto, projIndex) in cliente.projetos" :key="projIndex">
-                  {{ projeto.nome }}
-                </div> 
-            </td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
 <br/><br/><br/>
-
+      <!-- Componente Toast -->
+      <Toasts  ref="mensagens"></Toasts >
 </template>
 

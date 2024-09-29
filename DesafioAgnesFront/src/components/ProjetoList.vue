@@ -4,8 +4,12 @@
 import ProjetoService from '../services/ProjetoService'; // Importa o serviço
 import ClienteService from '../services/ClienteService'; // Importa o serviço
 import AtividadeService from '../services/AtividadeService'; // Importa o serviço
+import Toasts from '../components/ToastMensagens.vue';
 
 export default {
+    components: {
+      Toasts
+    },
     data() {
         return {
             projetos: [], // Array para armazenar os projetos
@@ -23,6 +27,12 @@ export default {
         this.listarClientes(); // Chama o método para listar clientes
     },
     methods: {
+        mostrarSucesso() {
+          this.$refs.mensagens.showToast('Projeto cadastrado com sucesso!', 'success');
+        },
+        mostrarErro() {
+          this.$refs.mensagens.showToast('Erro ao cadastrar projeto.', 'error');
+        },
         listarProjetos() {
             ProjetoService.listarProjetos()
                 .then(data => {
@@ -62,9 +72,11 @@ export default {
                     this.listarProjetos(); // Recarrega a lista de projetos após cadastro
                     this.nome = ''; // Limpa o campo nome
                     this.descricao = ''; // Limpa o campo descricao
+                    this.mostrarSucesso();
                 })
                 .catch(error => {
                     console.error('Erro ao cadastrar projeto:', error);
+                    this.mostrarErro();
                 });
         }
     }
@@ -184,5 +196,7 @@ export default {
     </div>
   </div>
 </div>
+      <!-- Componente Toast -->
+      <Toasts  ref="mensagens"></Toasts >
 </template>
 

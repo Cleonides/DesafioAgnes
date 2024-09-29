@@ -2,8 +2,12 @@
 
 <script>
 import ColaboradorService from '../services/ColaboradorService'; // Importa o serviço
+import Toasts from '../components/ToastMensagens.vue';
 
 export default {
+    components: {
+      Toasts
+    },
     data() {
         return {
             colaboradores: [], // Array para armazenar os colaboradores
@@ -17,6 +21,12 @@ export default {
         this.listarColaboradores(); // Chama o método para listar colaboradores
     },
     methods: {
+        mostrarSucesso() {
+          this.$refs.mensagens.showToast('Colaborador cadastrado com sucesso!', 'success');
+        },
+        mostrarErro() {
+          this.$refs.mensagens.showToast('Erro ao cadastrar colaborador.', 'error');
+        },
         listarColaboradores() {
             ColaboradorService.listarColaboradores()
                 .then(data => {
@@ -37,9 +47,11 @@ export default {
                     this.listarColaboradores(); // Recarrega a lista de colaboradores após cadastro
                     this.nome = ''; // Limpa o campo nome
                     this.cargo = ''; // Limpa o campo cargo
+                    this.mostrarSucesso();
                 })
                 .catch(error => {
                     console.error('Erro ao cadastrar colaborador:', error);
+                    this.mostrarErro();
                 });
         }
     }
@@ -104,6 +116,7 @@ export default {
     </div>
   </div>
 <br/><br/><br/>
-
+      <!-- Componente Toast -->
+      <Toasts  ref="mensagens"></Toasts >
 </template>
 
