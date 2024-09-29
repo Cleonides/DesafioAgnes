@@ -17,6 +17,7 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -115,9 +116,9 @@ class ProjetoServiceTest {
         atividade = new Atividade(ID, "Requesitos e doc", "Criação de requesitos, protótipos e documentação", Boolean.TRUE, null, null);
         atividadeDTO = new AtividadeDTO(ID, "Requesitos e doc", "Criação de requesitos, protótipos e documentação", Boolean.TRUE, null, null);
 
-        projeto = new Projeto(ID, NOME_PROJETO, DESCRICAO_PROJETO, STATUS, cliente, List.of(atividade), null);
+        projeto = new Projeto(ID, NOME_PROJETO, DESCRICAO_PROJETO, STATUS, cliente, Set.of(atividade), null);
         projetoDTO = new ProjetoDTO(ID, NOME_PROJETO, DESCRICAO_PROJETO, STATUS, clienteDTO);
-        projetoOptional = Optional.of(new Projeto(ID, NOME_PROJETO, DESCRICAO_PROJETO, STATUS, cliente, List.of(atividade), null));
+        projetoOptional = Optional.of(new Projeto(ID, NOME_PROJETO, DESCRICAO_PROJETO, STATUS, cliente, Set.of(atividade), null));
     }
 
     private void assertCamposProjeto(Projeto projeto) {

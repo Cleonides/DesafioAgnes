@@ -7,9 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -37,7 +35,7 @@ public class Projeto {
     private Cliente cliente;
 
     @OneToMany(mappedBy = "projeto", cascade = CascadeType.ALL)
-    private List<Atividade> atividades = new ArrayList<>();
+    private Set<Atividade> atividades = new HashSet<>();
 
     @OneToMany(mappedBy = "projeto", cascade = CascadeType.ALL)
     private Set<Colaborador> colaboradores = new HashSet<>();
