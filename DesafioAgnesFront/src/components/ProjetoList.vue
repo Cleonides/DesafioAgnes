@@ -148,7 +148,7 @@ export default {
             <td>{{ projeto.cliente.nome }}</td>
             <td>{{ projeto.status }}</td>
             <td>
-                <a class="btn btn-link" data-bs-toggle="modal" data-bs-target="#atividade" @click="listarAtividades(projeto.id, projeto.nome)">
+                <a class="btn btn-link" data-bs-toggle="modal" data-bs-target="#atividade" @click="listarAtividades(projeto.id)">
                   <i class="bi bi-eye"></i> Detalhar
                 </a>
             </td>
