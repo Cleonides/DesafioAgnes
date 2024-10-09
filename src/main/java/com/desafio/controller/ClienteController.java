@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/cliente")
-@CrossOrigin(origins = "http://localhost:8080") // Permitir o front-end acessar
+@CrossOrigin(origins = {"http://localhost:8080", "http://localhost:4200"})// Permitir o front-end acessar
 public class ClienteController {
     private final ClienteService clienteService;
 

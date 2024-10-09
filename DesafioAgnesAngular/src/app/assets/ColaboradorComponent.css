@@ -1,0 +1,4 @@
+/* src/app/cliente/cliente.component.css */
+.error {
+  color: red; /* Estilo para mensagens de erro */
+}
