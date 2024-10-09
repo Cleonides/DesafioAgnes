@@ -1,24 +1,17 @@
-# frontend
+# frontend em vue
 
-## Project setup
-```
-npm install
+## Para rodar na máquina global
+``` 
+npm install -g @vue/cli
 ```
 
-### Compiles and hot-reloads for development
+## Para criar o nome do projeto
+``` 
+vue create nome-do-seu-projeto
+```
+
+## Rodar o servidor
 ```
 npm run serve
+npx vue-cli-service serve
 ```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
